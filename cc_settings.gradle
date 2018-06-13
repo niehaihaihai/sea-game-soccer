@@ -1,0 +1,14 @@
+File getProjectDir(String dir) {
+    return new File("${buildscript.sourceFile.getParent()}/${dir}")
+}
+include ':core'
+project(':core').projectDir = getProjectDir("core")
+include ':core-android'
+project(':core-android').projectDir = getProjectDir("core-android")
+include ':games'
+project(':games').projectDir = getProjectDir("games")
+include ':android'
+project(':android').projectDir = getProjectDir("android")
+include ':desktop'
+project(':desktop').projectDir = getProjectDir("desktop")
+

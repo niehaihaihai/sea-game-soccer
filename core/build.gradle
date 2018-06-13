@@ -1,0 +1,18 @@
+apply plugin: "java"
+
+sourceCompatibility = 1.6
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+sourceSets.main.java.srcDirs = ["src/"]
+
+
+dependencies {
+    compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+    compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+    compile "com.alibaba:fastjson:$fastjsonVersion"
+    compile "com.squareup.okhttp3:okhttp:$okhttp3_version"
+    compile "com.squareup.okhttp3:logging-interceptor:$okhttp3_logging_interceptor_version"
+    compile "org.ligboy.retrofit2:converter-fastjson-android:$retrofit2_converter_fastjson_android_version"
+    compile "com.scireum:parsii:$parsiiVersion"
+    compile "com.esotericsoftware.spine:spine-libgdx:$spineVersion"
+}

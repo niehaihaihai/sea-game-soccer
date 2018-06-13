@@ -1,0 +1,139 @@
+//buildscript {
+//    repositories {
+//        mavenLocal()
+//        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath 'com.android.tools.build:gradle:2.2.0'
+//    }
+//}
+//
+//allprojects {
+//    apply plugin: "eclipse"
+//    apply plugin: "idea"
+//
+//    version = '1.0'
+//    ext {
+//        appName = "CoocaaIE"
+//        gdxVersion = '1.9.8'
+//        roboVMVersion = '2.3.3'
+//        box2DLightsVersion = '1.4'
+//        ashleyVersion = '1.7.0'
+//        aiVersion = '1.8.0'
+//        fastjsonVersion = '1.1.68.android'
+//        parsiiVersion = '3.1'
+//        spineVersion = '3.6.52.1'
+//        layoutlib = getLayoutlibJar()
+//    }
+//
+//    repositories {
+//        mavenLocal()
+//        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+//        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+//        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+//    }
+//}
+//
+//project(":desktop") {
+//    apply plugin: "java"
+//
+//
+//    dependencies {
+//        compile project(":core")
+//        compile project(":games")
+//        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+//        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+//        compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+//    }
+//}
+//
+//project(":android") {
+//    apply plugin: "android"
+//
+//    configurations { natives }
+//
+//    dependencies {
+//        provided files(layoutlib)
+//        compile project(":core-android")
+//        compile project(":games")
+//        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"
+//        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+//        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
+//
+//    }
+//}
+//
+//project(":core") {
+//    apply plugin: "java"
+//
+//
+//    dependencies {
+//        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+//        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+//        compile "com.alibaba:fastjson:$fastjsonVersion"
+//        compile "com.scireum:parsii:$parsiiVersion"
+//        compile "com.esotericsoftware.spine:spine-libgdx:$spineVersion"
+//    }
+//}
+//
+//project(":games") {
+//    apply plugin: "java"
+//
+//
+//    dependencies {
+//        compile project(':core')
+//    }
+//}
+//
+//tasks.eclipse.doLast {
+//    delete ".project"
+//}
+//
+//
+//private String getLayoutlibJar() {
+//    def path = getSDKPath()
+//    def layoutlibPath = "${path}${File.separator}data${File.separator}layoutlib.jar"
+//    return layoutlibPath
+//}
+//
+//private String getAndroidJar() {
+//    def path = getSDKPath()
+//    def androidPath = "${path}${File.separator}android.jar"
+//    return androidPath
+//}
+//
+//private String getSDKPath() {
+//    def android_home = System.getenv()['ANDROID_HOME']
+//    if (android_home == null || android_home.equals("")) {
+//        android_home = getSDKPathFromLocalProperty()
+//    }
+//    if (android_home == null || android_home.equals(""))
+//        return 'not found android.jar'
+//    def compileSdkVersion = 'android-' + 23
+//    def path = "${android_home}${File.separator}platforms${File.separator}${compileSdkVersion}"
+//    return path
+//}
+//
+//private String getSDKPathFromLocalProperty() {
+//    def rootDir = rootDir
+//    def localProperties = new File(rootDir, "local.properties")
+//    if (localProperties.exists()) {
+//        Properties properties = new Properties()
+//        localProperties.withInputStream {
+//            instr -> properties.load(instr)
+//        }
+//        return properties.getProperty('sdk.dir')
+//    }
+//    return ""
+//}

@@ -1,0 +1,33 @@
+id_wc2018_penalty_gamepage_dec_time.png
+size: 728, 198
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+time1
+  rotate: false
+  xy: 0, 0
+  size: 161, 198
+  orig: 161, 198
+  offset: 0, 0
+  index: 1
+time2
+  rotate: false
+  xy: 161, 0
+  size: 161, 198
+  orig: 161, 198
+  offset: 0, 0
+  index: 2
+time3
+  rotate: false
+  xy: 322, 0
+  size: 161, 198
+  orig: 161, 198
+  offset: 0, 0
+  index: 3
+timego
+  rotate: false
+  xy: 483, 0
+  size: 245, 198
+  orig: 245, 198
+  offset: 0, 0
+  index: -1

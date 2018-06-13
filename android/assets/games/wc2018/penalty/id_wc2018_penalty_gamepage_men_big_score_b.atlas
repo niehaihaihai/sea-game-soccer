@@ -1,0 +1,26 @@
+id_wc2018_penalty_gamepage_men_big_score_b.png
+size: 218, 1215
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+men1
+  rotate: false
+  xy: 0, 0
+  size: 218, 405
+  orig: 218, 405
+  offset: 0, 0
+  index: -1
+men2
+  rotate: false
+  xy: 0, 405
+  size: 218, 405
+  orig: 218, 405
+  offset: 0, 0
+  index: -1
+men3
+  rotate: false
+  xy: 0, 810
+  size: 218, 405
+  orig: 218, 405
+  offset: 0, 0
+  index: -1

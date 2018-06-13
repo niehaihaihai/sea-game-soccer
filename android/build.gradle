@@ -1,0 +1,144 @@
+apply plugin: "com.android.application"
+apply plugin: 'com.coocaa.gradle.plugin.builder'
+
+def ver_major = 1
+def ver_minor = 0
+def ver_build = ccbuilder_release_ext.ver_build
+
+android {
+    compileSdkVersion gradle.ext.api
+    buildToolsVersion gradle.ext.buildTools
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+
+        instrumentTest.setRoot('tests')
+    }
+    packagingOptions {
+        exclude 'META-INF/robovm/ios/robovm.xml'
+    }
+
+    defaultConfig {
+        applicationId "com.coocaa.ie"
+        minSdkVersion gradle.ext.minSdkVersion
+        targetSdkVersion gradle.ext.targetSdkVersion
+        versionCode(Integer.valueOf(ver_major) * 100000 + Integer.valueOf(ver_minor) * 1000 + Integer.valueOf(ver_build))
+        versionName ver_major.toString() + "." + ver_minor.toString() + "." + ver_build.toString()
+        multiDexEnabled true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-rules-sdk.pro'
+            signingConfig gradle.ext.sign_plaform
+            manifestPlaceholders = [
+                    MYAPP_DISMISS   : "coocaa.intent.category.MYAPP_DISMISS",
+                    APP_NO_UNINSTALL: "coocaa.intent.category.APP_NO_UNINSTALL"
+            ]
+        }
+        debug {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-rules-sdk.pro'
+            signingConfig gradle.ext.sign_plaform
+            manifestPlaceholders = [
+                    MYAPP_DISMISS   : "unknown",
+                    APP_NO_UNINSTALL: "unknown"
+            ]
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+configurations { natives }
+
+dependencies {
+    provided files(gradle.ext.layoutlibJar)
+    compile project(":core-android")
+    compile project(":games")
+    compile project(":CCConnecter")
+    compile project(':ccExJQRCode')
+    compile project(":ccExASkyLogSDK")
+    compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+//    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+//    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
+//    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+//    natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"
+    compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+//    natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
+    natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
+    compile 'com.umeng.analytics:analytics:latest.integration'
+//    natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-arm64-v8a"
+//    natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+//    natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86_64"
+}
+
+// called every time gradle gets executed, takes the native dependencies of
+// the natives configuration, and extracts them to the proper libs/ folders
+// so they get packed with the APK.
+task copyAndroidNatives() {
+//    file("libs/armeabi/").mkdirs();
+    file("libs/armeabi-v7a/").mkdirs();
+//    file("libs/arm64-v8a/").mkdirs();
+//    file("libs/x86_64/").mkdirs();
+//    file("libs/x86/").mkdirs();
+
+    configurations.natives.files.each { jar ->
+        def outputDir = null
+        if (jar.name.endsWith("natives-arm64-v8a.jar")) outputDir = file("libs/arm64-v8a")
+        if (jar.name.endsWith("natives-armeabi-v7a.jar")) outputDir = file("libs/armeabi-v7a")
+        if (jar.name.endsWith("natives-armeabi.jar")) outputDir = file("libs/armeabi")
+        if (jar.name.endsWith("natives-x86_64.jar")) outputDir = file("libs/x86_64")
+        if (jar.name.endsWith("natives-x86.jar")) outputDir = file("libs/x86")
+        if (outputDir != null) {
+            copy {
+                from zipTree(jar)
+                into outputDir
+                include "*.so"
+            }
+        }
+    }
+}
+
+task run(type: Exec) {
+    def path
+    def localProperties = project.file("../local.properties")
+    if (localProperties.exists()) {
+        Properties properties = new Properties()
+        localProperties.withInputStream { instr ->
+            properties.load(instr)
+        }
+        def sdkDir = properties.getProperty('sdk.dir')
+        if (sdkDir) {
+            path = sdkDir
+        } else {
+            path = "$System.env.ANDROID_HOME"
+        }
+    } else {
+        path = "$System.env.ANDROID_HOME"
+    }
+
+    def adb = path + "/platform-tools/adb"
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.coocaa.ie/com.coocaa.ie.AndroidLauncher'
+}
+
+ccbuilder_release_ext {
+    release_path = "${project.rootProject.projectDir.absolutePath}/release/${ver_major}.${ver_minor}/${ver_major}.${ver_minor}.${ver_build}"
+}

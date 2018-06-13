@@ -1,0 +1,26 @@
+id_wc2018_penalty_gamepage_men_small_score_b.png
+size: 164, 915
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+men1
+  rotate: false
+  xy: 0, 0
+  size: 164, 305
+  orig: 164, 305
+  offset: 0, 0
+  index: -1
+men2
+  rotate: false
+  xy: 0, 305
+  size: 164, 305
+  orig: 164, 305
+  offset: 0, 0
+  index: -1
+men3
+  rotate: false
+  xy: 0, 610
+  size: 164, 305
+  orig: 164, 305
+  offset: 0, 0
+  index: -1

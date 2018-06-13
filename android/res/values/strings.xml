@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">活动游戏</string>
+    <string name="wc2018_revive_dialog_how_use_voice">如何使用语音</string>
+    <string name="wc2018_revive_dialog_next_time">下次再说</string>
+    <string name="wc2018_quite_dialog_cancle">取消</string>
+    <string name="wc2018_quite_dialog_sure">确定</string>
+    <string name="wc2018_qr_dialog_phone_qr_title">使用手机扫描二维码分享</string>
+    <string name="wc2018_revive_dialog_remind_update_voice">检测到您的电视语音版本过低，升级后才可使用</string>
+    <string name="wc2018_revive_dialog_goto_update_voice_app">&#160;&#160;&#160;前往升级TV语音&#160;&#160;&#160;</string>
+    <string name="wc2018_revive_dialog_name">复活弹窗</string>
+    <string name="wc2018_quite_dialog_name">退出弹窗</string>
+    <string name="wc2018_penalty_voice_revive_world_cup">我爱世界杯</string>
+    <string name="wc2018_penalty_voice_revive_i_revive">我要复活</string>
+    <string name="wc2018_penalty_voice_revive_get_coin">复活赢酷币</string>
+    <string name="wc2018_answer_voice_revive_answer_coin">答题赢酷币</string>
+    <string name="wc2018_answer_voice_revive_get_money">我要万元现金</string>
+    <string name="wc2018_dialog_back">返回</string>
+
+    <string name="wc2018_settlement_info_button_text">分享战绩</string>
+    <string name="wc2018_settlement_info_tips2">本轮酷币        %1$s</string>
+    <string name="wc2018_settlement_info_tips3">本轮排名        %1$s</string>
+    <string name="wc2018_setlement_info_arraw_up">↑</string>
+    <string name="wc2018_setlement_info_arraw_down">↓</string>
+    <string name="wc2018_penalty_settlement_info_title1">本局进球</string>
+    <string name="wc2018_penalty_settlement_info_title2">本时段累计进球</string>
+    <string name="wc2018_answer_settlement_info_title1">答对题数</string>
+    <string name="wc2018_answer_settlement_info_title2">本时段累计答题</string>
+    <string name="wc2018_answer_settlement_info_defeat">击败%1$d%%的人</string>
+    <string name="wc2018_answer_settlement_main_tips">本时段游戏已结束，下轮游戏时间 %1$s</string>
+    <string name="wc2018_answer_settlement_button1_reloading">加载中 %1$s%%</string>
+    <string name="wc2018_answer_settlement_button1_play_again">再玩一局</string>
+    <string name="wc2018_answer_settlement_button1_check_other">查看其他任务</string>
+    <string name="wc2018_answer_settlement_button2_exit">退出游戏</string>
+    <string name="wc2018_answer_load_failed_dialog_name">&#160;&#160;刷新试试&#160;&#160;</string>
+    <string name="wc2018_answer_load_content_failed">获取内容失败</string>
+
+</resources>
